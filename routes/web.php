@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\Api\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +18,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
-//Route::post('/storeProduct', 'App\Http\Controllers\Api\ProductController@store');
+//products view  (table)
 Route::get('/products', function () {
     $products = \App\Models\Product::all();
     return view('backend.productsTable', compact('products'));
 });
 
+//create product view and update product
 Route::get('/products/createProductView', function () {
     return view('backend.createProduct');});
 Route::post('/products/createProduct', [ProductController::class, 'storeProduct']);
 
-Route::get('/Api/products/update', [ProductController::class, 'store']);
-Route::get('/Api/products/update/{{product}}', 'Api\ProductController@update');
+//update product view and update product
+Route::get('/products/updateProductView/{id}', function ($id) {
+    $product = \App\Models\Product::findOrFail($id);
+    return view('backend.updateProduct', compact('product'));
+})->name('products.edit');
+Route::put('/products/updateProduct/{id}', [ProductController::class, 'updateProduct'])->name('products.update');
 
+Route::get('/products/deleteProduct/{id}', function ($id) {
+    $product = \App\Models\Product::findOrFail($id);
+    return view('backend.products');
+})->name('products.destroy');
+
+Route::delete('/products/{id}', 'ProductController@destroy')->name('products.destroy');

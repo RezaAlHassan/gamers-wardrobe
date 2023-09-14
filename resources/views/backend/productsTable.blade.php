@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard GW</title>
@@ -11,7 +12,7 @@
         <h1>Responsive Table That Also Scrolls if Necessary</h1>
         <div role="region" aria-labelledby="Cap1" tabindex="0">
           <table id="Books">
-            <caption id="Cap1">Books I May or May Not Have Read</caption>
+            <a href="/products/createProductView">Create Product </a>
             <tr>
 
               <th>Product ID</th>
@@ -33,15 +34,51 @@
               <td>{{$product->quantity_m}}</td>
               <td>{{$product->quantity_l}}</td>
               <td>{{$product->total_quantity}}</td>
+              <td>
+                <a href="{{ route('products.edit', ['id' => $product->id]) }}">Edit</a>
+               {{--<a href="{{ route('products.delete', ['id' => $product->id]) }}">Delete</a>--}}
+            </td>
+            <td>
+              <a href="{{ route('products.destroy', ['id' => $product->id]) }}"  onclick="deleteProduct({{ $product->id }})">Delete</a>
+       
+          </td>
             </tr>
             @endforeach
           </table>
         </div>
       
         <p>
-          Note that this is an <em>accessible</em> (keyboard and screen reader) responsive (width and print) table. You can <a href="/createProduct">Create New Product</a> (so you can make your own).
+          Note that this is an <em>accessible</em> (keyboard and screen reader) responsive (width and print) table. You can <a href="/products/createProductView">Create New Product</a> (so you can make your own).
         </p>
       </main>
+      
+      {{--delete products --}}
+      <script>
+        function deleteProduct(productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                fetch(`/products/${productId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        // Reload the products table after successful deletion
+                        window.location.href = '/products';
+                    } else {
+                        console.error('Failed to delete product');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+        </script>
+
+        {{--js table --}}
       <script>
       function ResponsiveCellHeaders(elmID) {
         try {
