@@ -1,0 +1,286 @@
+@import url('https://fonts.google.com/specimen/Roboto+Flex');
+@import url('https://fonts.google.com/specimen/Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Monospace');
+@import url('https://fonts.google.com/specimen/Press+Start+2P');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Flex');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+
+
+body {
+  overflow: hidden;
+  color: #fff;
+  background-color: #F85555;
+  font-family: "Press Start 2P", monospace;
+}
+
+h1{
+    padding-left: 15%;
+    font-family: 'Press Start 2P';
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    font-size: 1.75em;
+    animation: flash 10s infinite;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 16px rgb(0, 0, 0);
+
+}
+
+.flexbox-container {
+  display: flex;
+  flex-direction: row;
+  margin-right: 20%;
+}
+
+
+h3{
+  font-family: 'Press Start 2P';
+  font-size: 1.5em;
+  color: #ffffff;
+  padding-right: 5%;
+  text-shadow: 1px 1px 4px rgb(0, 0, 0);
+  margin-right: 10%;
+}
+
+h3:hover{
+  text-shadow: 2px 2px 6px rgb(36, 146, 248);
+}
+
+@media only screen and (max-width: 900px) {
+  h3 {
+    font-size: 15px;
+  }
+}
+
+a{
+  text-decoration: none;
+  color:white;
+}
+
+
+  @keyframes flash {
+    0% {
+      color:#11E7F4;
+      text-shadow: 4px 4px 0px black;
+    }
+    50% {
+      color: rgb(255, 255, 255);
+      text-shadow: 4px 4px 0px rgb(24, 194, 236);
+    }
+    100% {
+      color: #11E7F4;
+      text-shadow: 4px 4px 0px black;
+    }
+  }
+  @keyframes bg {
+    0% {
+      background-size: 100%;
+    }
+    50% {
+      background-size: 150%;
+    }
+    100% {
+      background-size: 100%;
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #999999;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+
+
+header
+{ text-align: center;
+  background-color: #f8555500;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 100px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo
+{  
+  align-items: center;
+  justify-content: left;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.carousel {
+  
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.carousel-item {
+  --items: 10;
+  --width: clamp(150px, 30vw,  300px);
+  --height: clamp(200px, 40vw,  400px);
+  --x: calc(var(--active) * 800%);
+  --y: calc(var(--active) * 200%);
+  --rot: calc(var(--active) * 120deg);
+  --opacity: calc(var(--zIndex) / var(--items) * 3 - 2);
+  overflow: hidden;
+  position: absolute;
+  z-index: var(--zIndex);
+  width: var(--width);
+  height: var(--height);
+  margin: calc(var(--height) * -0.5) 0 0 calc(var(--width) * -0.5);
+  border-radius: 10px;
+  top: 50%;
+  left: 50%;
+  user-select: none;
+  transform-origin: 0% 100%;
+  box-shadow: 0 10px 50px 10px rgba(0, 0, 0, .5);
+  background: black;
+  pointer-events: all;
+  transform:  translate(var(--x), var(--y)) rotate(var(--rot)) ;
+  transition: transform .8s cubic-bezier(0, 0.02, 0, 1);
+
+  .carousel-box {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity .8s cubic-bezier(0, 0.02, 0, 1);
+    opacity: var(--opacity);
+    font-family: 'Orelo-sw-db', serif;
+
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .5));
+    }
+  }
+}
+
+  .title {
+    font-family: 'Press Start 2P';
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+    bottom: 20px;
+    left: 20px;
+    transition: opacity .8s cubic-bezier(0, 0.02, 0, 1);
+    font-size: clamp(10px, 1.8vw, 20px);
+    text-shadow: 2px 2px 0px rgb(0, 0, 0);
+  }
+
+  .details{
+    cursor: pointer;
+    font-family: 'Press Start 2P';
+    text-decoration: dotted;
+    text-decoration: underline;
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+    top: 10px;
+    left: 20px;
+    transition: opacity .8s cubic-bezier(0, 0.02, 0, 1);
+    text-shadow: 2px 2px 0px rgb(0, 0, 0);
+    font-size: clamp(3px, 2vw, 18px);
+  }
+
+  .details:hover {
+    text-shadow: 2px 2px 0px rgb(24, 194, 236);
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .social
+{
+  margin-left: 2%;
+  position: absolute;
+  z-index: 10;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.social li
+{
+  list-style: none;
+}
+.social li a
+{
+  display: inline-block;
+  margin-right: 20px;
+  filter: invert(1);
+  transform: scale(0.5);
+  transition: 0.5s;
+}
+.social li a:hover
+{
+  transform: scale(0.5) translateY(-15px);
+}
+
+.flexbox-column {
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 900px) {
+  .flexbox-container {
+    flex-direction: column;
+    position: relative;
+    top: 30px;
+    border: 5px solid black;
+    background-color: #11E7F4;
+    padding: 20px;
+    margin-right: 100px;
+  }
+  
+  h1 {
+    font-size: 20px;
+    position: relative;
+    right:30px;
+  }
+
+  a {
+    color: #000000;
+    text-shadow: none;
+  }
+
+  a:hover {
+    text-shadow: 2px 2px 0px #fff;
+  }
+
+  .logo {
+    position: relative;
+    bottom:15px;
+
+  }
+
+}

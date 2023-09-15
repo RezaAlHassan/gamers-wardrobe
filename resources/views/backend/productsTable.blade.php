@@ -8,6 +8,15 @@
     <link rel="stylesheet" href={{ asset('css/productsTable-styles.css')}}>
 </head>
 <body>
+  @if ($errors->any())
+  <div class="alert alert-danger">
+      <ul style="color: red">
+          @foreach ($errors->all() as $error)
+              <li style="color: red">{{ $error }}</li>
+          @endforeach
+      </ul>
+  </div>
+@endif
     <main>
         <h1>Responsive Table That Also Scrolls if Necessary</h1>
         <div role="region" aria-labelledby="Cap1" tabindex="0">
@@ -28,8 +37,8 @@
             <tr>
               <td>{{$product->id}}</td>
               <td>{{$product->product_name}}</td>
-              <td>{{$product->product_price}}</td>
               <td>{{$product->product_description}}</td>
+              <td>{{$product->product_price}}</td>
               <td>{{$product->quantity_m}}</td>
               <td>{{$product->quantity_m}}</td>
               <td>{{$product->quantity_l}}</td>
@@ -39,8 +48,16 @@
                {{--<a href="{{ route('products.delete', ['id' => $product->id]) }}">Delete</a>--}}
             </td>
             <td>
-              <a href="{{ route('products.destroy', ['id' => $product->id]) }}"  onclick="deleteProduct({{ $product->id }})">Delete</a>
+              <form id="delete-form" method="POST" action="{{ route('products.destroy',$product->id) }}">
+                @csrf
+                @method('delete')
+                {{--<a href="{{ route('products.destroy', ['id' => $product->id]) }}" style="color:red" onclick="deleteProduct({{ $product->id }})">Delete</a>--}}
        
+                <button type='submit' id="delete" class="text-inverse" data-toggle="tooltip">
+                  <a style="color:red"> Delete</a>
+                </button>
+                </form>
+             
           </td>
             </tr>
             @endforeach
@@ -51,32 +68,26 @@
           Note that this is an <em>accessible</em> (keyboard and screen reader) responsive (width and print) table. You can <a href="/products/createProductView">Create New Product</a> (so you can make your own).
         </p>
       </main>
-      
-      {{--delete products --}}
-      <script>
-        function deleteProduct(productId) {
-            if (confirm('Are you sure you want to delete this product?')) {
-                fetch(`/products/${productId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json',
-                    },
-                })
-                .then((response) => {
-                    if (response.ok) {
-                        // Reload the products table after successful deletion
-                        window.location.href = '/products';
-                    } else {
-                        console.error('Failed to delete product');
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-            }
+
+        <script>
+    document.getElementById('delete').addEventListener('click', function () {
+    // Assuming you have a button with id "deleteButton" to trigger the deletion
+
+    fetch('/products/' + productId, {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.redirect) {
+            window.location.href = data.redirect; // Redirect to the specified URL
         }
-        </script>
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+      
+      </script>
 
         {{--js table --}}
       <script>
@@ -147,7 +158,8 @@
         }
       }
       
-      AddTableARIA();</script>
+      AddTableARIA();
+      </script>
     
 </body>
 </html>

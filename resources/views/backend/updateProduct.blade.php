@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create Product : GW</title>
+    <title>Edit Product : GW</title>
 <link rel="stylesheet" href={{asset('css/createProduct-styles.css')}}>
 
 </head>
@@ -32,8 +32,9 @@
      <br>
      <div class="col-md-6 offset-md-3 mt-5">
      <h1>Update Product</h1>
-     <form accept-charset="UTF-8" id="productForm" enctype="multipart/form-data">
+     <form accept-charset="UTF-8" id="productForm" method="POST" action="{{ route('products.update',$product->id) }}" enctype="multipart/form-data">
       @csrf
+      @method ('PUT')
 
       <div class="form-group">
          <label for="exampleInputName">product name</label>
@@ -74,52 +75,48 @@
          <input type="file" name="other_images[]" multiple="multiple" value="{{$product->other_images}}">
        </div>
        <hr>
-       <button type="submit" onclick="editProduct({{ $product->id }})" class="btn btn-primary">Submit</button>
+       <button type="submit" id="update" class="btn btn-primary">Submit</button>
      </form>
  </div> 
+ <script>
+  document.getElementById('delete').addEventListener('click', function () {
+  // Assuming you have a button with id "deleteButton" to trigger the deletion
+
+  fetch('/products/' + productId, {
+      method: 'DELETE',
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.redirect) {
+          window.location.href = data.redirect; // Redirect to the specified URL
+      }
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+});
+    
+    </script>
     
   </main>
+  <script>
+    document.getElementById('update').addEventListener('click', function () {
+    // Assuming you have a button with id "deleteButton" to trigger the deletion
 
-<script {{--src=asset("redirectionToProductsView.js")--}}>
-  function editProduct(productId) {
-  document.getElementById('productForm').addEventListener('submit', function (e) {
-    //e.preventDefault(); // Prevent the default form submission
-    
-    formData.append('product_name', document.getElementById('product_name'));
-    formData.append('product_description', document.getElementById('product_description').value);
-    formData.append('product_price', document.getElementById('product_price').value);
-    formData.append('quantity_m', document.getElementById('quantity_m').value);
-    formData.append('quantity_l', document.getElementById('quantity_l').value);
-    formData.append('quantity_xl', document.getElementById('quantity_xl').value);
-
-    // Create a new FormData object to serialize the form data
-    const formData = new FormData(this);
-    fetch('/products/updateProduct/${productId}', {
+    fetch('/products/' + productId, {
         method: 'PUT',
-        body: formData,
     })
-    .then((response) => {
-        if (response.status === 201) {
-            // If the POST request is successful (status code 201 Created),
-            // parse the response JSON to get the created product data
-            return response.json();
-        } else {
-            // Handle errors here, such as displaying an error message to the user
-            console.error('Failed to update product');
-            throw new Error('Failed to update product');
+    .then(response => response.json())
+    .then(data => {
+        if (data.redirect) {
+            window.location.href = data.redirect; // Redirect to the specified URL
         }
     })
-    .then((createdProduct) => {
-        // Redirect to the newly created product's page without making another POST request
-        window.location.href = '/products' ; // Example redirection
-    })
-    .catch((error) => {
-        // Handle any errors that occurred during the fetch or processing
+    .catch(error => {
         console.error('Error:', error);
     });
-})
-};
-</script>
-
+});
+      
+      </script>
 </body>
 </html>

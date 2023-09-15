@@ -1,0 +1,199 @@
+
+@import url('https://fonts.google.com/specimen/Roboto+Flex');
+@import url('https://fonts.google.com/specimen/Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Monospace');
+@import url('https://fonts.google.com/specimen/Press+Start+2P');
+
+:root, [data-bs-theme=light] {
+  --bs-link-color-rgb: white;
+  --bs-link-decoration: none;
+  --bs-link-hover-color: #0a58ca;
+  --bs-white-rgb: 255,255,255;
+  --bs-black-rgb: 0,0,0;
+}
+
+body {
+  font-family: "Press Start 2P", monospace;
+  color: #fff;
+  background-color: red;
+}
+
+a{
+  font-size: 0.5em;
+  color: #fff;
+  text-decoration: none;
+}
+
+.color:hover{
+cursor: pointer;
+border: solid 1px white;
+padding: 5px 5px 5px 5px;
+}
+
+.text-details{
+  background-color: #000000;
+  color: #fff;
+  float: right; 
+  width: 45%;
+  position : relative;
+  top:80px;
+  padding: 2%;
+  font-family: 'Press Start 2P';
+  font-size: 1em;
+}
+
+
+
+ header
+{ text-align: center;
+  background-color: #f8555500;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 100px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h3{
+  font-family: 'Press Start 2P';
+  font-size: 0.4em;
+  color: #ffffff;
+  padding-right: 5%;
+  text-shadow: 1px 1px 4px rgb(0, 0, 0);
+  margin-right: 10%;
+}
+
+h3:hover{
+  text-shadow: 2px 2px 6px rgb(36, 146, 248);
+}
+
+header .logo
+{ 
+  align-items: center;
+  justify-content: left;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+
+ .flexbox-container {
+  display: flex;
+  flex-direction: row;
+  margin-right: 5%;
+}
+
+h1{
+  color: #fff;
+  padding-left: 15%;
+  font-family: 'Press Start 2P';
+  font-size: 1.75em;
+  animation: flash 10s infinite;
+  text-transform: uppercase;
+  text-shadow: 4px 4px 16px rgb(0, 0, 0);
+
+}
+
+.product-container
+{
+  display: flex;
+  flex-direction: column;
+margin-left: 70px;
+}
+ 
+ .product-image {
+  height: 30%;
+  width: 38%;
+  float: center;
+  margin:2em;
+  filter: grayscale(0.9); 
+  filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.3));
+ }
+ 
+ .product-image:hover {
+  box-shadow: 5px 5px 5px #fff;
+     -moz-transform: scale(1.1);
+     -webkit-transform: scale(1.1);
+     -o-transform: scale(1.1);
+     -ms-transform: scale(1.1);
+     -webkit-transform: scale(1.1);
+     transform: scale(1.1);
+ 
+     -webkit-transition: transform 0.5s ease-in-out;
+     -moz-transition:transform 0.5s ease-in-out;
+     -ms-transition:transform 0.5s ease-in-out;
+ }
+
+
+ @media only screen and (max-width: 900px) {
+  .flexbox-container {
+    flex-direction: column;
+    position: relative;
+    top: 40px;
+    border: 5px solid black;
+    background-color: #11E7F4;
+    padding: 20px;
+    margin-right: 200px;
+  }
+  
+  h1 {
+    font-size: 10px;
+    position: relative;
+    right:30px;
+    margin-right: 200px;
+  }
+
+  .text-details{
+    font-size: 0.7em;
+  }
+
+}
+
+
+
+  a {
+    text-decoration: none;
+    color: #000000;
+    text-shadow: none;
+  }
+
+  a:hover {
+    text-shadow: 2px 2px 0px rgb(36, 146, 248);
+  }
+
+  .logo {
+    position: relative;
+    bottom:15px;
+
+  }
+
+  .social
+{
+  margin-left: 60px;
+  z-index: 10;
+  bottom: 20px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.social li
+{
+  list-style: none;
+}
+.social li a
+{
+  display: inline-block;
+  margin-right: 20px;
+  filter: invert(1);
+  transform: scale(0.5);
+  transition: 0.5s;
+}
+.social li a:hover
+{
+  transform: scale(0.5) translateY(-15px);
+}

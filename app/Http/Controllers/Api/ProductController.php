@@ -89,7 +89,7 @@ class ProductController extends Controller
             'main_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for image upload
             'other_images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+        $totalQuantity = 0;
         $totalQuantity = (
             $request->input('quantity_m') +
             $request->input('quantity_l') +
@@ -129,17 +129,25 @@ class ProductController extends Controller
             'other_images' => json_encode($otherImageNames),
         ]);
         
-        
+        $response = [
+            'message' => 'product updated', // You can include additional data if needed
+            'redirect' => route('products.table') // Replace with the URL you want to redirect to
+        ];
         
 
-        return response()->json($product);
+        return response()->json($response);
     }
 
     public function destroy($id)
     {
         Product::findOrFail($id)->delete();
 
-        return response()->json(null, 204);
+        $response = [
+            'message' => 'product deleted', // You can include additional data if needed
+            'redirect' => route('products.table') // Replace with the URL you want to redirect to
+        ];
+    
+        return response()->json($response);
     }
 
 }

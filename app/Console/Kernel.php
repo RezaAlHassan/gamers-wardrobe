@@ -29,4 +29,14 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+     // protected $middleware = [
+    // ...Global middleware
+   //     \App\Http\Middleware\RedirectIfJson::class,
+  //   ];
+
+      // protected $routeMiddleware = [
+     // ...Special route middleware
+    //    'redirect_if_json' => \App\Http\Middleware\RedirectIfJson::class,
+   // ];
+    
 }
