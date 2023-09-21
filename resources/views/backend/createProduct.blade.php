@@ -32,9 +32,8 @@
      <br>
      <div class="col-md-6 offset-md-3 mt-5">
      <h1>Create Product</h1>
-     <form accept-charset="UTF-8" id="productForm" action="/products/updateProduct/{{ $product->id }}" method="POST" enctype="multipart/form-data">
+     <form accept-charset="UTF-8" id="productForm" action="/products/createProduct" method="POST" enctype="multipart/form-data">
       @csrf
-      @method('PUT')
        <div class="form-group">
          <label for="exampleInputName">product name</label>
          <input type="text" name="product_name" class="form-control" id="product_name" placeholder="product name">
@@ -80,14 +79,14 @@
   </main>
 <script {{--src=asset("redirectionToProductsView.js")--}}>
   document.getElementById('productForm').addEventListener('submit', function (e) {
-    e.preventDefault(); // Prevent the default form submission
+   // e.preventDefault(); // Prevent the default form submission
 
     // Create a new FormData object to serialize the form data
     const formData = new FormData(this);
 
     // Make a POST request to create the product
     fetch('/products/createProduct', {
-        method: 'PUT',
+        method: 'POST',
         body: formData,
     })
     .then((response) => {
