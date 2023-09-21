@@ -12,7 +12,7 @@
 </head>
 <body style="background-color: #F85555;">
     <header>
-        <img class="logo " src={{ asset("media/logo-gw.png")}} width="120px">
+        <img class="logo" src={{ asset("media/logo-gw.png")}} width="120px">
         <h1 style=" color: white; margin-right: 10%;">Dynasty White</h1>
         <div class="flexbox-container">
         <h3><a style="text-decoration: none; color: white;" href="#">Home</a></a></h3>
